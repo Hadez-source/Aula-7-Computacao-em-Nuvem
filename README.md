@@ -110,3 +110,9 @@ role.rbac.authorization.k8s.io/consulta-pods configured
 root@controlplane:~$ kubectl auth can-i watch pods -n aula7 \
   --as=system:serviceaccount:aula7:leitor
 yes
+
+Limpeza do laboratorio:
+root@controlplane:~$ kubectl delete namespace aula7
+namespace "aula7" deleted
+root@controlplane:~$ kubectl get namespace aula7
+Error from server (NotFound): namespaces "aula7" not found
