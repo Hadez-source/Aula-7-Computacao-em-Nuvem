@@ -98,3 +98,15 @@ Perguntas (analise de resultados):
 3- Porque a conta só tem permissão para consultar e listar Pods, não para excluir.
 4- Uma conta com essa Role poderia ler Secrets? Justifiquem.
 
+
+
+Desafio em Dupla:
+root@controlplane:~$ kubectl -n aula7 create role consulta-pods \
+  --verb=get,list,watch --resource=pods \
+  --dry-run=client -o yaml | kubectl apply -f -
+Warning: resource roles/consulta-pods is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+role.rbac.authorization.k8s.io/consulta-pods configured
+
+root@controlplane:~$ kubectl auth can-i watch pods -n aula7 \
+  --as=system:serviceaccount:aula7:leitor
+yes
